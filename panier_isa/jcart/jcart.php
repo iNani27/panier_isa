@@ -284,7 +284,7 @@ class Jcart {
 		$url   = (isset($_POST[$url])) ? $_POST[$url] : false;
 
 		// Optional CSRF protection, see: http://conceptlogic.com/jcart/security.php
-		$jcartToken = $_POST['jcartToken'];
+		$jcartToken = (isset($_POST['jcartToken'])) ? $_POST['jcartToken'] : false;
 
 		// Only generate unique token once per session
 		if(!$_SESSION['jcartToken']){
@@ -331,7 +331,7 @@ class Jcart {
 		}
 
 		// Update all items in the cart
-		if($_POST['jcartUpdateCart'] || $_POST['jcartCheckout'])	{
+		if(isset($_POST['jcartUpdateCart']) || isset($_POST['jcartCheckout']))	{
 			$cartUpdated = $this->update_cart();
 			if ($cartUpdated !== true)	{
 				$errorMessage = $config['text']['quantityError'];
